@@ -50,7 +50,7 @@ liblist-moreutils-xs-perl liblocal-lib-perl libmodule-build-perl \
 libmodule-cpanfile-perl libmodule-signature-perl libmoox-handlesvia-perl \
 libparse-pmfile-perl libpod-markdown-perl libpod-readme-perl \
 libsoftware-license-perl libstring-shellquote-perl libtype-tiny-perl \
-libgeo-ipfree-perl libtype-tiny-xs-perl liburi-escape-xs-perl \
+libgeo-ipfree-perl rspamd libtype-tiny-xs-perl liburi-escape-xs-perl \
 libclone-pp-perl libtest-requires-perl libtest-warnings-perl libtest-fatal-perl \
 p7zip p7zip-full arj liblhasa0 lhasa libmspack0 cabextract pax libidn2-dev libdb-dev \
 cpanminus libcompress-raw-zlib-perl libconvert-tnef-perl libfilesys-df-perl libinline-perl \
@@ -68,7 +68,17 @@ libterm-size-any-perl libterm-table-perl libtest-exception-perl libtest-failwarn
 libtest-nowarnings-perl libtest-object-perl libtest-regexp-perl libtest-subcalls-perl libtest2-suite-perl \
 libtext-diff-perl libmce-perl libsereal-decoder-perl libsereal-encoder-perl libtest-perl-critic-perl \
 clamav-base libclamav11 clamav-freshclam clamav-daemon bzip2-doc clamav clamdscan libbz2-dev \
-libclamav-client-perl libssl-dev libtommath1 libtommath-dev libclamav-dev libtommath-doc 
+libclamav-client-perl libssl-dev libtommath1 libtommath-dev libclamav-dev libtommath-doc \
+dovecot-lmtpd fonts-glyphicons-halflings isa-support libalien-build-perl libcapture-tiny-perl \
+libclone-choose-perl libdbd-sqlite3-perl libdbix-simple-perl libemail-abstract-perl libemail-address-xs-perl \
+libemail-messageid-perl libemail-mime-contenttype-perl libemail-mime-encodings-perl libemail-mime-perl \
+libemail-sender-perl libevent-pthreads-2.1-7t64 libfile-copy-recursive-perl libhash-merge-perl \
+libhyperscan5 libjemalloc2 libjs-bootstrap4 libjs-requirejs libluajit-5.1-2 libluajit-5.1-common \
+liblzf1 libmecab2 libmime-types-perl libmoox-types-mooselike-perl libmozilla-ca-perl libnet-idn-encode-perl \
+libnet-libidn2-perl libnet-smtps-perl libobject-accessor-perl libopendbx1-mysql libprotobuf-lite32t64 \
+libscope-guard-perl libsql-abstract-perl libtest-deep-perl libtest-file-sharedir-perl libtest-output-perl \
+libtext-aligner-perl libtext-table-perl libtext-unidecode-perl mecab-ipadic mecab-ipadic-utf8 mecab-utils \
+php8.3-phpdbg redis-server redis-tools sse3-support 
 
 systemctl restart chrony
 echo > /var/log/mail.log

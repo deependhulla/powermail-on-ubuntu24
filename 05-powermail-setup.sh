@@ -102,6 +102,7 @@ systemctl disable wpa_supplicant 1>/dev/null 2>/dev/null
 /home/powermail/bin/vaddalias fbl@`hostname -f` postmaster@`hostname -f`
 /home/powermail/bin/vaddalias www-data@`hostname -f` postmaster@`hostname -f`
 
+/home/powermail/bin/vadddomain `hostname -d`
 /home/powermail/bin/vaddalias root@`hostname -d` postmaster@`hostname -d`
 /home/powermail/bin/vaddalias clamav@`hostname -d` postmaster@`hostname -d`
 /home/powermail/bin/vaddalias abuse@`hostname -d` postmaster@`hostname -d`
