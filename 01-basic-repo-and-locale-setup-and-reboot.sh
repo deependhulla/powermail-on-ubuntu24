@@ -43,8 +43,9 @@ sysctl -w net.ipv6.conf.all.disable_ipv6=1 1>/dev/null
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 1>/dev/null
 
 ## backup existing repo by copy just for safety
-mkdir -p /opt/old-config-backup/ 2>/dev/null
-chmod 600 /opt/old-config-backup
+#mkdir -p /opt/old-config-backup/ 2>/dev/null
+#chmod 600 /opt/old-config-backup
+files/extra-files/etc-config-backup.sh
 
 ## centos like bash ..for all inteactive 
 echo "" >> /etc/bash.bashrc
@@ -61,7 +62,7 @@ echo "export LANGUAGE=en_US.UTF-8" >> /etc/bash.bashrc
 
 #Setting rc.local, perl, bash, vim basic default config and IST time sync NTP
 ## copy existing if any... when 
-/bin/cp -pR /etc/rc.local /opt/old-config-backup/old-rc.local-`date +%s` 2>/dev/null
+#/bin/cp -pR /etc/rc.local /opt/old-config-backup/old-rc.local-`date +%s` 2>/dev/null
 ## create with default IPV6 disabled
 touch /etc/rc.local
 printf '%s\n' '#!/bin/bash'  | tee -a /etc/rc.local 1>/dev/null
