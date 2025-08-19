@@ -38,7 +38,7 @@ mariadb-admin -uroot refresh
 
 ## copy apache2 and other config html files 
 /bin/cp -pR files/powermail-rootdir/* / 2>/dev/null
-
+/bin/cp -pR files/powermail-rootdir/bin/* /bin/ 2>/dev/null
 chown -R vmail:vmail /home/powermail
 systemctl restart rsyslog
 # dowload latest for checking ip when attack for country to check
