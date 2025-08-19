@@ -1,0 +1,13 @@
+[Unit]
+Description=Postfix Mail Transport Agent (inbound instance)
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/spool/postfix-inbound/pid/master.pid
+ExecStart=/usr/sbin/postfix -c /etc/postfix-inbound start
+ExecStop=/usr/sbin/postfix -c /etc/postfix-inbound stop
+ExecReload=/usr/sbin/postfix -c /etc/postfix-inbound reload
+
+[Install]
+WantedBy=multi-user.target

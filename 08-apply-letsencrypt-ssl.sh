@@ -32,7 +32,7 @@ sed -i "s/#xsmtpd_tls_key_file/smtpd_tls_key_file/" /etc/postfix/main.cf
 sed -i "s/#xsmtp_tls_cert_file/smtp_tls_cert_file/" /etc/postfix/main.cf
 sed -i "s/#xsmtp_tls_key_file/smtp_tls_key_file/" /etc/postfix/main.cf
 /etc/init.d/postfix restart
-
+systemctl restart postfix-inbound
 cat /etc/letsencrypt/live/`hostname -f`/fullchain.pem > /etc/webmin/miniserv.pem
 cat /etc/letsencrypt/live/`hostname -f`/privkey.pem >> /etc/webmin/miniserv.pem
 systemctl restart webmin

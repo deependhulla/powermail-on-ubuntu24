@@ -2,6 +2,12 @@
 
 ## install postfix dovecot fetchmail and recoll for search-engine for archive use latter
 
+
+mkdir -p /etc/postfix-inbound
+mkdir -p /var/spool/postfix-inbound
+mkdir -p /var/lib/postfix-inbound
+chown postfix:postfix /var/lib/postfix-inbound/
+
 echo `hostname -f` > /etc/mailname
 ## adding 89 so that migration from qmailtoaster setup is easier.
 groupadd -g 89 vmail 2>/dev/null
@@ -67,10 +73,17 @@ sed -i "s/ohm8ahC2/`cat /usr/local/src/mariadb-powermail-pass`/" /etc/dovecot/do
 sed -i "s/ohm8ahC2/`cat /usr/local/src/mariadb-powermail-pass`/" /etc/dovecot/dovecot-dict-sql.conf.ext
 sed -i "s/ohm8ahC2/`cat /usr/local/src/mariadb-powermail-pass`/" /etc/dovecot/dovecot-lastlogin-map.ext
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /etc/postfix/main.cf
+sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /etc/postfix-inbound/main.cf
 sed -i "s/ohm8ahC2/`cat /usr/local/src/mariadb-powermail-pass`/" /home/powermail/etc/powermail.mysql
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /etc/dovecot/conf.d/10-ssl.conf
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /etc/dovecot/conf.d/15-lda.conf
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /etc/apache2/sites-available/default-ssl.conf
+
+
+/bin/cp -pRv files/extra-files/postfix-inbound.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable postfix-inbound
+systemctl start postfix-inbound
 
 ## use only for heavy load server via Service or use nginx 
 systemctl stop imapproxy.service 2>/dev/null
@@ -88,7 +101,7 @@ echo $WEPASSVPOP > /usr/local/src/manager-powermail-pass
 /usr/share/webmin/changepass.pl  /etc/webmin manager `cat /usr/local/src/manager-powermail-pass`
 cd -
 
-##disable this program as not needed
+##disable this program as not needed its for wifi network or dial-up remote location only
 systemctl disable ModemManager 1>/dev/null 2>/dev/null
 systemctl disable wpa_supplicant 1>/dev/null 2>/dev/null
 

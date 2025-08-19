@@ -7,12 +7,16 @@
 #myorigin = /etc/mailname
 mail_name=PowerMail
 myorigin = /etc/mailname
-myhostname = powermail.mydomainname.com
+myhostname = powermail.mydomainname.co 
 
-##for Archive
-#always_bcc = fullarchive@powermail.mydomainname.com
-##sender_bcc_maps = hash:/etc/postfix/sender_bcc
-##recipient_bcc_maps = hash:/etc/postfix/recipient_bcc
+
+# Unique names and directories for this instance
+queue_directory = /var/spool/postfix-inbound
+data_directory = /var/lib/postfix-inbound
+multi_instance_group = inbound
+multi_instance_directories = /etc/postfix-inbound
+syslog_name = postfix/inbound
+
 
 ## to use /etc/hosts first than dns
 #lmtp_host_lookup = native
@@ -40,8 +44,8 @@ compatibility_level = 3.6
 
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-mydestination = localhost, localhost.localdomain
-relayhost = 
+mydestination = localhostinbound, localhostinbound.localdomain
+relayhost = [127.0.0.1]:20025 
 ## use below stype for smtp relay via online or other smtp
 #relayhost = [192.168.1.254]:587
 ##smtp_sasl_password_maps = hash:/etc/postfix/relay_passwd
@@ -71,9 +75,8 @@ hash_queue_depth = 2
 ## for only iinternal so that haraka can be outside
 ##inet_interfaces = loopback-only
 
-## only localhost loopback for local and oitbound delivery --- for network postfix-inbound is used
-inet_interfaces = loopback-only
-##inet_interfaces = all
+#inet_interfaces = loopback-only
+inet_interfaces = all
 
 inet_protocols = ipv4
 ## if ipv6 also used
@@ -92,7 +95,9 @@ proxy_read_maps = $local_recipient_maps $mydestination $virtual_alias_maps $virt
 relay_domains = proxy:mysql:/etc/postfix/sql/mysql_relay_domains_maps.cf
 ##smtpd_command_filter = pcre:/etc/postfix/command_filter.regex
 sender_bcc_maps = hash:/etc/postfix/bcc_sender
-virtual_mailbox_domains = proxy:mysql:/etc/postfix/sql/mysql_virtual_domains_maps.cf
+### diasabled for inbound ## 
+#virtual_mailbox_domains = proxy:mysql:/etc/postfix/sql/mysql_virtual_domains_maps.cf
+virtual_mailbox_domains = localhostinbound.localdomain
 virtual_alias_maps =
    proxy:mysql:/etc/postfix/sql/mysql_virtual_alias_maps.cf,
    proxy:mysql:/etc/postfix/sql/mysql_virtual_alias_domain_maps.cf,
@@ -137,8 +142,7 @@ empty_address_recipient = postmaster@powermail.mydomainname.com
 
 ##for relay to other smtp
 #smtp_sasl_auth_enable = yes
-## disabled --no used --as its only takes localhost connection from postfix-inbound
-smtpd_sasl_auth_enable = no
+smtpd_sasl_auth_enable = yes
 smtpd_sasl_security_options = noanonymous
 broken_sasl_auth_clients = yes
 smtpd_sasl_type = dovecot
@@ -164,12 +168,17 @@ tls_preempt_cipherlist = yes
 #xsmtp_tls_cert_file = /etc/letsencrypt/live/powermail.mydomainname.com/fullchain.pem
 #xsmtp_tls_key_file = /etc/letsencrypt/live/powermail.mydomainname.com/privkey.pem
 
-
 smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 
 smtp_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtp_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+
+
+
+
+
+
 
 
 smtpd_tls_mandatory_protocols=!SSLv2,!SSLv3
@@ -190,13 +199,14 @@ smtpd_sasl_authenticated_header = yes
 # information on enabling SSL in the smtp client.
 
 ## for opendkim
-milter_default_action = accept
-milter_protocol = 6
+#milter_default_action = accept
+#milter_protocol = 6
 ##https://usermanual.wiki/Document/MailScanner20Milter20Guide.1842687663.pdf
 ## YOU WOULD SEE DISCARD IN LOG ..PLEASE IGNORE --see document page 6 for information
 #smtpd_milters =  inet:localhost:33333,inet:localhost:12345
-smtpd_milters =  inet:localhost:12345
-non_smtpd_milters = inet:localhost:12345
+## not for first inbound
+#smtpd_milters =  inet:localhost:12345
+#non_smtpd_milters = inet:localhost:12345
 
 transport_maps = hash:/etc/postfix/transport_smtp_routes 
 
@@ -227,11 +237,11 @@ transport_maps = hash:/etc/postfix/transport_smtp_routes
 #qmgr_message_recipient_limit = 40000
 
 ## for MailScanner MSmilter
-qmqpd_authorized_clients = 127.0.0.1
+#qmqpd_authorized_clients = 127.0.0.1
 #smtpd_recipient_limit = 1000
 
 ## perforance tunning codes for healthy server.
-#default_destination_concurrency_limit=50
+default_destination_concurrency_limit=1
 default_destination_recipient_limit=1
 #default_process_limit=200
 #smtp_mx_session_limit=100
