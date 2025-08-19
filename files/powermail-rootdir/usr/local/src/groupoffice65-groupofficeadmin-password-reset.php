@@ -21,7 +21,7 @@ $sqlx="UPDATE groupoffice.`core_auth_password` SET `password` = '".$pp."' WHERE 
 #print "$sqlx";
 $filesql="/tmp/grouppass.sql";
 file_put_contents($filesql,$sqlx);
-$cmdx="cat /tmp/grouppass.sql | mysql ";
+$cmdx="cat /tmp/grouppass.sql | mariadb ";
 `$cmdx`;
 unlink($filesql);
 ?>
