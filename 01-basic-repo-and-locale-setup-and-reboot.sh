@@ -4,7 +4,7 @@ DEBIAN_FRONTEND=noninteractive
 
 apt-get update
 apt -y full-upgrade
-apt -y install openssh-server locales whiptail vim auditd curl chrony screen net-tools git mc tmux parted \
+apt -y install ifupdown openssh-server locales whiptail vim auditd curl chrony screen net-tools git mc tmux parted \
 gdisk debconf-utils pwgen apt-transport-https software-properties-common ethtool dirmngr ca-certificates 
 
 ## as most of time its a KVM VM ..like on RHEL,Ubuntu,ProxmoxVE
