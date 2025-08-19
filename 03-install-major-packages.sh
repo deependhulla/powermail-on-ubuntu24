@@ -156,7 +156,6 @@ systemctl daemon-reload
 #cloudflare dns: [2606:4700:4700::1111]
 
 ## for quick postfix queue management
-/bin/cp -p files/extra-files/pfHandle /bin/
 
 ## safe backup
 files/extra-files/etc-config-backup.sh
