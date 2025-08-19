@@ -39,19 +39,19 @@ sed -i "s|/var/lib/groupoffice|/home/groupoffice|"  /etc/groupoffice/config.php
 echo "Remove exisitng default groupoffice database "
 echo "And install one with all Module enabled and IMAP Auth activated"
 echo "with groupofficeadmin user and random password in : /usr/local/src/groupofficeadmin-pass"
-#echo "Y" | mysqladmin drop groupoffice -uroot 1>/dev/null 2>/dev/null
-#mysqladmin create groupoffice -uroot
-#/bin/cp -p files/groupoffice-db.sql /tmp/groupoffice-db-tmp.sql
-#sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /tmp/groupoffice-db-tmp.sql
-#sed -i "s/mydomainname\.com/`hostname -d`/" /tmp/groupoffice-db-tmp.sql
-#mysql groupoffice < /tmp/groupoffice-db-tmp.sql
-#/bin/rm -rf /tmp/groupoffice-db-tmp.sql 1>/dev/null 2>/dev/null
+echo "Y" | mariadb-admin drop groupoffice -uroot 1>/dev/null 2>/dev/null
+mariadb-admin create groupoffice -uroot
+/bin/cp -p files/groupoffice-db.sql /tmp/groupoffice-db-tmp.sql
+sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /tmp/groupoffice-db-tmp.sql
+sed -i "s/mydomainname\.com/`hostname -d`/" /tmp/groupoffice-db-tmp.sql
+mariadb groupoffice < /tmp/groupoffice-db-tmp.sql
+/bin/rm -rf /tmp/groupoffice-db-tmp.sql 1>/dev/null 2>/dev/null
 
 ##groupofficeadmin password set
 GOPASSVPOP=`pwgen -c -1 8`
 echo $GOPASSVPOP > /usr/local/src/groupofficeadmin-pass
 
-#php /usr/local/src/groupoffice65-groupofficeadmin-password-reset.php
+php /usr/local/src/groupoffice65-groupofficeadmin-password-reset.php
 
 
 sudo -u www-data php /usr/share/groupoffice/cli.php core/System/upgrade
