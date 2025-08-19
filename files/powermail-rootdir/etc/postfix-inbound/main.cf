@@ -7,7 +7,7 @@
 #myorigin = /etc/mailname
 mail_name=PowerMail
 myorigin = /etc/mailname
-myhostname = powermail.mydomainname.co 
+myhostname = powermail.mydomainname.com 
 
 
 # Unique names and directories for this instance
