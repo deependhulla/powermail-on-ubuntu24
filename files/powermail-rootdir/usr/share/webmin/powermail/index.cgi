@@ -787,7 +787,7 @@ $sqlu="UPDATE `mailbox` SET ".$vsql." `name` = '".$newnamex."', `quota` = '".$vu
 $table_data = $dbh->prepare($sqlu);
 $table_data->execute;
 
-$sqlu="UPDATE `powermailbox` SET `autoclean_trash` = '".$in{'auto_clean_trash'}."', `autoclean_spam` = '".$in{'auto_clean_spam'}."', `autoclean_promo` = '".$in{'auto_clean_promo'}."', `change_pass_max_days` = '".$in{'change_pass_max_days'}."', `change_pass_alerts_before_days` = '".$in{'change_pass_alerts_before_days'}."' WHERE `powermailbox`.`username` = '".$in{'vusername'}."';";
+$sqlu="UPDATE `powermailbox` SET `autoclean_trash` = '".$in{'auto_clean_trash'}."', `deliveryto`='".$in{'vuserdelivetyto'}."', `autoclean_spam` = '".$in{'auto_clean_spam'}."', `autoclean_promo` = '".$in{'auto_clean_promo'}."', `change_pass_max_days` = '".$in{'change_pass_max_days'}."', `change_pass_alerts_before_days` = '".$in{'change_pass_alerts_before_days'}."' WHERE `powermailbox`.`username` = '".$in{'vusername'}."';";
 #print "$sqlu <br>";
 $table_data = $dbh->prepare($sqlu);
 $table_data->execute;
@@ -926,7 +926,7 @@ my @opts=('local','other');
 print ui_table_row('Delivery Mail to ',ui_select('vuserdelivetyto', $deliverytox,\@opts,1,0,0,0,"").' Server ');
 
 print ui_table_row('Auto Clean Mail from Trash folder after ',ui_textbox('auto_clean_trash', $auto_clean_trash, 10).' <strong>Days</strong> (0  = disable, e.g: 30 days)');
-print ui_table_row('Auto Clean Mail from Spam folder after ',ui_textbox('auto_clean_spam', $auto_clean_spam, 10).' <strong>Days</strong> (0  = disable, e.g: 30 days)');
+print ui_table_row('Auto Clean Mail from Spam/Junk folder after ',ui_textbox('auto_clean_spam', $auto_clean_spam, 10).' <strong>Days</strong> (0  = disable, e.g: 30 days)');
 print ui_table_row('Auto Clean Mail from Promotional folder after ',ui_textbox('auto_clean_promo', $auto_clean_promo, 10).'<strong>Days</strong> (0  = disable, e.g.: 30 days)');
 print ui_table_row('Change Password in ',ui_textbox('change_pass_max_days', $change_pass_max_days, 10).'<strong>Days</strong> else force autogenerate and change password.(0  = disable, e.g.: 90 days) ');
 print ui_table_row('Alert for Change Password ',ui_textbox('change_pass_alerts_before_days', $change_pass_alerts_before_days, 10).'<strong>Days</strong> before and than send daily once.(0  = disable, e.g.: 7 days)');

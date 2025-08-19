@@ -75,7 +75,7 @@ $cmd1="/bin/touch /tmp/read-changepass-dovecot-restart.pid";
 //shell_exec (`$cmd1`);
 
 
-print "<center> <font color=green>Your password  for email <b> ".$userid."</b> has changed successully.<br><br> Click here to access <a href=\"/\">TechnoMail Services</a></font></center>";
+print "<center> <font color=green>Your password  for email <b> ".$userid."</b> has changed successully.<br><br> Click here to access <a href=\"/\">Mail Services</a></font></center>";
 }
 
 
