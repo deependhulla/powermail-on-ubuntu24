@@ -96,6 +96,7 @@ systemctl disable wpa_supplicant 1>/dev/null 2>/dev/null
 /etc/init.d/opendkim start
 
 /home/powermail/bin/vadddomain `hostname -f`
+/bin/dkim-setup.pl `hostname -f`
 /home/powermail/bin/vaddalias root@`hostname -f` postmaster@`hostname -f`
 /home/powermail/bin/vaddalias clamav@`hostname -f` postmaster@`hostname -f`
 /home/powermail/bin/vaddalias abuse@`hostname -f` postmaster@`hostname -f`
@@ -103,6 +104,7 @@ systemctl disable wpa_supplicant 1>/dev/null 2>/dev/null
 /home/powermail/bin/vaddalias www-data@`hostname -f` postmaster@`hostname -f`
 
 /home/powermail/bin/vadddomain `hostname -d`
+/bin/dkim-setup.pl `hostname -d`
 /home/powermail/bin/vaddalias root@`hostname -d` postmaster@`hostname -d`
 /home/powermail/bin/vaddalias clamav@`hostname -d` postmaster@`hostname -d`
 /home/powermail/bin/vaddalias abuse@`hostname -d` postmaster@`hostname -d`
