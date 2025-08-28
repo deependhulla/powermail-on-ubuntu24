@@ -172,10 +172,20 @@ smtp_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtp_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 
 
-smtpd_tls_mandatory_protocols=!SSLv2,!SSLv3
-smtp_tls_mandatory_protocols=!SSLv2,!SSLv3
-smtpd_tls_protocols=!SSLv2,!SSLv3
-smtp_tls_protocols=!SSLv2,!SSLv3
+#smtpd_tls_mandatory_protocols=!SSLv2,!SSLv3
+#smtp_tls_mandatory_protocols=!SSLv2,!SSLv3
+#smtpd_tls_protocols=!SSLv2,!SSLv3
+#smtp_tls_protocols=!SSLv2,!SSLv3
+
+# Disable TLS 1.0 and 1.1 for inbound mail (SMTP server)
+smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
+
+# Disable TLS 1.0 and 1.1 for outbound mail (SMTP client)
+smtp_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
+smtp_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
+
+
 smtpd_tls_eecdh_grade=strong
 smtp_tls_note_starttls_offer = yes
 smtpd_use_tls=yes
