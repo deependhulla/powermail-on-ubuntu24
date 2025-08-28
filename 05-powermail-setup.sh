@@ -24,6 +24,8 @@ chmod 666 /var/log/dovecot.log
 #sed -i "s/#RateLimitBurst=10000/RateLimitBurst=0/"  /etc/systemd/journald.conf
 #systemctl restart systemd-journald
 
+mkdir /var/lib/postfwd2
+chown -R postfw:postfw /var/lib/postfwd2/
 
 sed -i "s/SOCKET\=local\:\$RUNDIR\/opendkim.sock/#SOCKET\=local\:\$RUNDIR\/opendkim.sock/" /etc/default/opendkim
 sed -i "s/#SOCKET\=inet\:12345\@localhost/SOCKET\=inet\:12345\@localhost/" /etc/default/opendkim
