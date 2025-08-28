@@ -1,1 +1,4 @@
-id=R001; sender=~/.*/; action=rate(sender/1010/86400/REJECT only 1000 messages per day for $$sender)
+id=SASL_RATE_LIMIT; sasl_username==yash@powermail.mydomainame.com; action=rate(sasl_username/2000/86400/REJECT Exceeded daily email limit. Try again tomorrow.);
+id=CATCHALL; action=DUNNO;
+
+#id=R001; sender=~/.*/; action=rate(sender/1010/86400/REJECT only 1000 messages per day for $$sender)
