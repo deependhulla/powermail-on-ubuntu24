@@ -327,10 +327,10 @@ if (('postfix' === $mta || 'msmail' === $mta) && $tablecheck->num_rows > 0) { //
 ###--  DATE_FORMAT(m.timestamp,'" . DATE_FORMAT . ' ' . TIME_FORMAT . "') AS 'Date/Time',
     $sql1 = "
  SELECT
-m.relay_date as 'Relay Date',
+m.relay_date as 'Date',
 m.relay_time as 'Time',
-  m.relay_to AS 'Relayed to',
   m.delay AS 'Delay',
+  m.relay_to AS 'Relayed to',
   m.status_text AS 'Status'
  FROM
   mtalog AS m
@@ -362,20 +362,20 @@ $sth1 = dbquery($sql1);
 if (false !== $sth1 && $sth1->num_rows > 0) {
     // Display the relay table entries
     echo ' <tr><td class="heading-w175">' . __('relayinfo04') . '</td><td class="detail">' . "\n";
-    echo '  <table class="sa_rules_report" width="100%">' . "\n";
+    echo '  <table class="usa_rules_report" width="100%">' . "\n";
     echo '   <tr>' . "\n";
     for ($f = 0; $f < $sth1->field_count; ++$f) {
         $fieldInfo1 = $sth1->fetch_field_direct($f);
-        echo '   <th>' . $fieldInfo1->name . '</th>' . "\n";
+        echo '   <th >' . $fieldInfo1->name . '</th>' . "\n";
     }
     echo "   </tr>\n";
     while ($row = $sth1->fetch_row()) {
         echo '    <tr>' . "\n";
-        echo '     <td class="detail" align="left">' . $row[0] . '</td>' . "\n"; // Date/Time
-        echo '     <td class="detail" align="left">' . $row[1] . '</td>' . "\n"; // Relayed by
-            echo '     <td class="detail" align="left">' . $row[2], '</td>' . "\n";
-        echo '     <td class="detail">' . $row[3] . '</td>' . "\n"; // Delay
-        echo '     <td class="detail">' . $row[4] . '</td>' . "\n"; // Status
+        echo '     <td xclass="detail" width=6% align="left">' . $row[0] . '</td>' . "\n"; // Date/Time
+        echo '     <td xclass="detail" width=6% align="left">' . $row[1] . '</td>' . "\n"; // Relayed by
+            echo '     <td xclass="detail" width=6% align="left" >' . $row[2], '</td>' . "\n";
+        echo '     <td xclass="detail" width=20% >' . $row[3] . '</td>' . "\n"; // Delay
+        echo '     <td xclass="detail">' . $row[4] . '</td>' . "\n"; // Status
         echo '    </tr>' . "\n";
     }
     echo "  </table>\n";
