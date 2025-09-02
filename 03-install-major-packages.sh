@@ -24,7 +24,7 @@ dirmngr parted gdisk apt-transport-https lsb-release ca-certificates iputils-pin
 python3-full debconf-utils pwgen xfsprogs iftop htop multitail net-tools elinks pssh apache2 \
 python3-pylint-common pylint iptables-persistent build-essential gnupg2 zip rar unrar ftp php rsync unzip \
 python3-pip libimage-exiftool-perl poppler-utils tnef whois libauthen-pam-perl php-zip \
-libio-pty-perl libnet-ssleay-perl  lynx lynx-common perl-openssl-defaults  \
+libio-pty-perl libnet-ssleay-perl  lynx lynx-common perl-openssl-defaults libopendbx1-sqlite3 \
 libapache2-mod-php  php-cli php-common php-imap php-ldap php-xml phpmyadmin tar \
 gpg dovecot-dev git libxapian-dev libicu-dev libsqlite3-dev autoconf automake libtool pkg-config \
 php-curl php-mbstring php-zip php-apcu php-gd php-imagick imagemagick mcrypt \
