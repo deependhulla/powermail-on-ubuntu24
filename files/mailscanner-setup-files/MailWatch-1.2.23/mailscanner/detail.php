@@ -323,22 +323,22 @@ $output='';
 $sqlcheck = "SHOW TABLES LIKE 'mtalog_ids'";
 $tablecheck = dbquery($sqlcheck);
 if (('postfix' === $mta || 'msmail' === $mta) && $tablecheck->num_rows > 0) { // version for postfix
+### DVD CHanged
+###--  DATE_FORMAT(m.timestamp,'" . DATE_FORMAT . ' ' . TIME_FORMAT . "') AS 'Date/Time',
     $sql1 = "
  SELECT
-  DATE_FORMAT(m.timestamp,'" . DATE_FORMAT . ' ' . TIME_FORMAT . "') AS 'Date/Time',
-  m.host AS 'Relayed by',
-  m.relay AS 'Relayed to',
+m.relay_date as 'Relay Date',
+m.relay_time as 'Time',
+  m.relay_to AS 'Relayed to',
   m.delay AS 'Delay',
-  m.status AS 'Status'
+  m.status_text AS 'Status'
  FROM
   mtalog AS m
        	LEFT JOIN mtalog_ids AS i ON (i.smtp_id = m.msg_id)
  WHERE
   i.smtpd_id='" . $url_id . "'
- AND
-  m.type='relay'
  ORDER BY
-  m.timestamp DESC";
+  m.relay_date DESC,relay_time DESC";
 } else { // version for sendmail
     $sql1 = "
  SELECT
@@ -357,6 +357,7 @@ if (('postfix' === $mta || 'msmail' === $mta) && $tablecheck->num_rows > 0) { //
   timestamp DESC";
 }
 
+#print "--> $sql1";
 $sth1 = dbquery($sql1);
 if (false !== $sth1 && $sth1->num_rows > 0) {
     // Display the relay table entries
@@ -372,11 +373,7 @@ if (false !== $sth1 && $sth1->num_rows > 0) {
         echo '    <tr>' . "\n";
         echo '     <td class="detail" align="left">' . $row[0] . '</td>' . "\n"; // Date/Time
         echo '     <td class="detail" align="left">' . $row[1] . '</td>' . "\n"; // Relayed by
-        if (($lhost = @gethostbyaddr($row[2])) !== $row[2]) {
-            echo '     <td class="detail" align="left">' . $lhost . '</td>' . "\n"; // Relayed to
-        } else {
             echo '     <td class="detail" align="left">' . $row[2], '</td>' . "\n";
-        }
         echo '     <td class="detail">' . $row[3] . '</td>' . "\n"; // Delay
         echo '     <td class="detail">' . $row[4] . '</td>' . "\n"; // Status
         echo '    </tr>' . "\n";
