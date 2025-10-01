@@ -13,3 +13,4 @@
 
 # Under no circumstances should this be changed to "yes".
 FromOrTo:	default			no
+From:	postmaster@powermail.mydomainname.com	 no

@@ -7,4 +7,6 @@
 #From:		152.78.		yes
 #From:		130.246.	yes
 #From:		host:soton.ac.uk yes # Note this is slower than using the IP
-FromOrTo:	default		no
+#FromOrTo:	default		no
+#From:	raj@powermail.mydomainname.com	yes
+
