@@ -118,5 +118,6 @@ systemctl start mailscanner
 systemctl enable msmilter
 systemctl stop msmilter
 systemctl start msmilter
+systemctl enable postfwd
 
 echo "Done."
