@@ -1,0 +1,38 @@
+
+vi    /usr/share/groupoffice/modules/email/controller/MessageController.php
+
+                try {
+                        $mailer->send($message);
+                } catch(\Throwable $e) {
+                        $msg = GO::t("Sorry, an error occurred") . ': '. $mailer->lastError(). ' - '. $e->getMessage();
+
+
+ 
+                $this->fireEvent('beforesend', array(
+                                &$this,
+                                &$response,
+                                &$message,
+                                &$mailer,
+                                $account,
+                                $alias,
+                                $params
+                ));     
+                         
+                        
+                try {
+                        $mailer->send($message);
+                } catch(\Throwable $e) {
+                        $msg = GO::t("Sorry, an error occurred") . ': '. $mailer->lastError(). ' - '. $e->getMessage();
+//// DVD
+//$msg='ACESS DDDDDDD';
+//                      throw new Exception($msg);
+//throw new \Exception('Could not move message');
+//   throw new \Exception(GO::t("Message could not be saved because the 'Drafts' folder is disabled.\n\nGo to E-mail -> Administration -> Accounts -> Double click account -> Folders to configure it.", "email"));
+throw new \GO\Base\Exception\AccessDenied($msg);
+//throw new \GO\Base\Exception\MailError();
+
+
+                }
+
+
+
