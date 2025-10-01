@@ -7,10 +7,10 @@
 #myorigin = /etc/mailname
 mail_name=PowerMail
 myorigin = /etc/mailname
-myhostname = powermail.mydomainname.com
+myhostname = cloudmail.technoinfotech.co.in
 
 ##for Archive
-#always_bcc = fullarchive@powermail.mydomainname.com
+#always_bcc = fullarchive@cloudmail.technoinfotech.co.in
 ##sender_bcc_maps = hash:/etc/postfix/sender_bcc
 ##recipient_bcc_maps = hash:/etc/postfix/recipient_bcc
 
@@ -108,7 +108,10 @@ virtual_mailbox_limit_maps = proxy:mysql:/etc/postfix/sql/mysql_virtual_mailbox_
 #virtual_mailbox_limit_override = yes
 #virtual_maildir_limit_message = Sorry, the user's maildir has overdrawn his diskspace quota, please try again later.
 #virtual_overquota_bounce = yes
-smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unlisted_sender,reject_unlisted_recipient,reject_non_fqdn_sender, reject_non_fqdn_recipient, reject_unauth_destination, reject_unauth_pipelining, reject_invalid_hostname, reject_unknown_sender_domain,check_recipient_access pcre:$config_directory/x-add-envelope-to,check_sender_access hash:/etc/postfix/sender_access,check_policy_service inet:127.0.0.1:12340  
+smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unlisted_sender,reject_unlisted_recipient,reject_non_fqdn_sender, reject_non_fqdn_recipient, reject_unauth_destination, reject_unauth_pipelining, reject_invalid_hostname, reject_unknown_sender_domain,check_recipient_access pcre:$config_directory/x-add-envelope-to, check_policy_service inet:127.0.0.1:12340 
+
+smtpd_sender_restrictions = check_sender_access hash:/etc/postfix/sender_access 
+
 #####smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unlisted_sender,reject_unlisted_recipient,reject_non_fqdn_sender, reject_non_fqdn_recipient, reject_unauth_destination, reject_unauth_pipelining, reject_invalid_hostname, reject_unknown_sender_domain, check_policy_service unix:private/policy,check_recipient_access pcre:$config_directory/x-add-envelope-to, check_sender_access hash:/etc/postfix/sender_access,check_policy_service inet:127.0.0.1:12340
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
@@ -126,10 +129,10 @@ message_size_limit = 51200000
 
 #bounce_queue_lifetime = 7d
 #maximal_queue_lifetime = 7d
-bounce_queue_lifetime = 4h
-maximal_queue_lifetime = 4h
-2bounce_notice_recipient = postmaster@powermail.mydomainname.com
-empty_address_recipient = postmaster@powermail.mydomainname.com
+bounce_queue_lifetime = 1h
+maximal_queue_lifetime = 1h
+2bounce_notice_recipient = postmaster@cloudmail.technoinfotech.co.in
+empty_address_recipient = postmaster@cloudmail.technoinfotech.co.in
 
 # TLS parameters
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
@@ -159,17 +162,21 @@ smtp_tls_ciphers = high
 tls_random_source = dev:/dev/urandom
 
 tls_preempt_cipherlist = yes
-#xsmtpd_tls_cert_file = /etc/letsencrypt/live/powermail.mydomainname.com/fullchain.pem
-#xsmtpd_tls_key_file = /etc/letsencrypt/live/powermail.mydomainname.com/privkey.pem
-#xsmtp_tls_cert_file = /etc/letsencrypt/live/powermail.mydomainname.com/fullchain.pem
-#xsmtp_tls_key_file = /etc/letsencrypt/live/powermail.mydomainname.com/privkey.pem
 
+#xsmtpd_tls_cert_file = /etc/letsencrypt/live/cloudmail.technoinfotech.co.in/fullchain.pem
+#xsmtpd_tls_key_file = /etc/letsencrypt/live/cloudmail.technoinfotech.co.in/privkey.pem
+#xsmtp_tls_cert_file = /etc/letsencrypt/live/cloudmail.technoinfotech.co.in/fullchain.pem
+#xsmtp_tls_key_file = /etc/letsencrypt/live/cloudmail.technoinfotech.co.in/privkey.pem
 
 smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-
 smtp_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtp_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+
+
+
+
+
 
 
 #smtpd_tls_mandatory_protocols=!SSLv2,!SSLv3
@@ -204,8 +211,8 @@ milter_default_action = accept
 milter_protocol = 6
 ##https://usermanual.wiki/Document/MailScanner20Milter20Guide.1842687663.pdf
 ## YOU WOULD SEE DISCARD IN LOG ..PLEASE IGNORE --see document page 6 for information
-#smtpd_milters =  inet:localhost:33333,inet:localhost:12345
-smtpd_milters =  inet:localhost:12345
+smtpd_milters =  inet:localhost:33333,inet:localhost:12345
+#smtpd_milters =  inet:localhost:12345
 non_smtpd_milters = inet:localhost:12345
 
 transport_maps = hash:/etc/postfix/transport_smtp_routes 

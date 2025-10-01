@@ -5,8 +5,6 @@ chmod 777 /home/groupoffice/
 chown -R www-data:www-data /home/groupoffice/
 
 echo "Downloading Latest GroupOffice "
-#echo "deb http://repo.group-office.com/ sixeight main" > /etc/apt/sources.list.d/groupoffice.list
-#wget -qO - https://repo.group-office.com/downloads/groupoffice.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/groupoffice.gpg --import-ownertrust
 
 
 echo "deb http://repo.group-office.com/ twentyfivezero main" > /etc/apt/sources.list.d/groupoffice.list
