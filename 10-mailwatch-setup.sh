@@ -36,15 +36,15 @@ chmod 666 /var/log/clamav/clamav.log 2>/dev/null
 #/bin/cp -pR files/mailscanner-setup-files/MailWatch-1.2.23/tools/Postfix_relay/mailwatch-milter-relay-tail-process.sh /usr/local/bin/
 #/bin/cp -pR files/mailscanner-setup-files/MailWatch-1.2.23/tools/Cron_jobs/mailwatch /etc/cron.daily/
 /bin/cp -pR files/mailscanner-setup-files/MailWatch-1.2.23/mailscanner /var/www/html/
-#/bin/cp -pv files/mailscanner-setup-files/conf.php /var/www/html/mailscanner/
+/bin/cp -pv files/mailscanner-setup-files/conf.php /var/www/html/mailscanner/
 chown -R www-data:www-data /var/www/html/mailscanner/
 chmod 666 /var/spool/MailScanner/incoming/SpamAssassin.cache.db 1>/dev/null 2>/dev/null
 
-#sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/conf.php
+sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/conf.php
 sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /usr/share/MailScanner/perl/custom/MailWatchConf.pm
 #sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/imagedata/index.php
 #sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/detail.php
-#sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /var/www/html/mailscanner/conf.php
+sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /var/www/html/mailscanner/conf.php
 #sed -i "s/powermail\.mydomainname\.com/`hostname -f`/"   /etc/MailScanner/MailScanner.conf
 echo "Resarting mailscanner and msmilter service ...please wait..."
 systemctl restart mailscanner msmilter.service 
