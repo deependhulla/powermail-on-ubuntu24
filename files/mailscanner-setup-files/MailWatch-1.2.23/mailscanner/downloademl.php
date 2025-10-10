@@ -38,6 +38,11 @@ $dvdvalue=$dvdvalue.$dvddate."/".$dvdfile;
 $mailfile=$dvdvalue;
 $mc=array();
 $mc1=file_get_contents($mailfile);
+if($mc1=="")
+{
+print "Archive Mail is moved from this location.";
+exit;
+}
 $mc=explode("\n",$mc1);
 $maildata="";
 $d=0;
