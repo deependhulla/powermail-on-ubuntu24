@@ -8,8 +8,8 @@ echo "Creating Database mailscanner for storing all logs for mailwatch"
 mariadb-admin create mailscanner -uroot 1>/dev/null 2>/dev/null
 mariadb < files/mailscanner-setup-files/MailWatch-1.2.23/create.sql 2>/dev/null
 mariadb < files/mailscanner-setup-files/MailWatch-1.2.23/create.sql 2>/dev/null
-#mariadb -f < files/mailscanner-setup-files/MailWatch-1.2.23/mailwatch-fix-for-subject-special-char-support.sql 2>/dev/null 
-#mariadb -f < files/mailscanner-setup-files/MailWatch-1.2.23/mailwatch-extra.sql 2>/dev/null 
+mariadb -f < files/mailscanner-setup-files/mailwatch-fix-for-subject-special-char-support.sql 2>/dev/null 
+mariadb -f < files/mailscanner-setup-files/mailwatch-extra.sql 2>/dev/null 
 echo "GRANT ALL PRIVILEGES ON mailscanner.* TO mailscanner@localhost IDENTIFIED BY '$MYSQLPASSMAILW'" | mariadb -uroot
 mariadb-admin -uroot reload
 mariadb-admin -uroot refresh
@@ -42,17 +42,17 @@ chmod 666 /var/spool/MailScanner/incoming/SpamAssassin.cache.db 1>/dev/null 2>/d
 
 sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/conf.php
 sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /usr/share/MailScanner/perl/custom/MailWatchConf.pm
-#sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/imagedata/index.php
-#sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/detail.php
+sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/imagedata/index.php
+sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/detail.php
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /var/www/html/mailscanner/conf.php
-#sed -i "s/powermail\.mydomainname\.com/`hostname -f`/"   /etc/MailScanner/MailScanner.conf
+sed -i "s/powermail\.mydomainname\.com/`hostname -f`/"   /etc/MailScanner/MailScanner.conf
 echo "Resarting mailscanner and msmilter service ...please wait..."
 systemctl restart mailscanner msmilter.service 
 ##saferside chown
 chmod 666 /var/spool/MailScanner/incoming/SpamAssassin.cache.db 2>/dev/null 1>/dev/null
-#mysql < files/mailscanner-files/add-auth-track.sql 
-#mysql < files/mailscanner-files/imageviewdata.sql 
 
+mariadb -f < files/mailscanner-setup-files/add-auth-track.sql 2>/dev/null
+mariadb -f < files/mailscanner-setup-files/imagedata-db-sql-table.sql  2>/dev/null
 
 echo "All Setup Done ,please reboot the Server once";
 echo "Done."

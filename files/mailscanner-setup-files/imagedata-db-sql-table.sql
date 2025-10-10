@@ -1,4 +1,4 @@
-
+use mailscanner;
 CREATE TABLE `imageviewdata` (
   `uid` bigint(20) NOT NULL,
   `msg_id` varchar(255) NOT NULL DEFAULT '',

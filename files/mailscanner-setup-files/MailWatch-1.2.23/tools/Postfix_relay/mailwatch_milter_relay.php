@@ -165,7 +165,7 @@ function process_sql()
 
             // Find correllating ids and update table, drop from queue
             if (isset($smtpd_id) && $smtpd_id !== $smtp_id) {
-                dbquery("REPLACE INTO `mtalog_ids` VALUES ('" . $smtpd_id . "','" . $smtp_id . "')");
+                dbquery("REPLACE INTO `mtalog_ids` VALUES (NULL,'" . $smtpd_id . "','" . $smtp_id . "','0')");
                 array_splice($idqueue, $i, 1);
                 --$i;
                 $idcount = count($idqueue);
