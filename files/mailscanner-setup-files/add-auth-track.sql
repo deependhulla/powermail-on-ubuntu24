@@ -11,3 +11,10 @@ ALTER TABLE mailscanner.`maillog_auth` ADD `central_done` TINYINT NOT NULL DEFAU
 ALTER TABLE mailscanner.`mtalog_ids` ADD `central_done` TINYINT NOT NULL DEFAULT '0' AFTER `smtp_id`, ADD INDEX (`central_done`);
 ALTER TABLE mailscanner.`mtalog` ADD `central_done` TINYINT NOT NULL DEFAULT '0' AFTER `delay`, ADD INDEX (`central_done`);
 
+
+ALTER TABLE mailscanner.`maillog_auth` ADD `inbound_mailid` VARCHAR(250) NOT NULL AFTER `clientauth`, ADD INDEX (`inbound_mailid`);
+
+
+ALTER TABLE `maillog_auth` ADD `uid` BIGINT NOT NULL FIRST;
+ALTER TABLE `maillog_auth` CHANGE `uid` `uid` BIGINT(20) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`uid`);
+ALTER TABLE `mailscanner`.`maillog_auth` DROP INDEX `mail_id`, ADD INDEX `mail_id` (`mail_id`) USING BTREE;

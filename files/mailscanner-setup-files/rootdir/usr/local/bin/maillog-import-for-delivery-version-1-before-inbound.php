@@ -84,53 +84,6 @@ $logx['logmsg']=trim($mlinedata);
 $gotrecord=0;
 #print_r($logx);
 ############################################
-############################################
-############################################
-if($logx['logname']=='postfix/inbound/smtp')
-{
-print "\n SPECIAL postfix/inbound/smtp";
-print_r($logx);
-$datax=array();
-$datax1=array();
-$datax2=array();
-$datax=explode(":",$logx['logmsg']);
-$datax1=explode(" ",$datax[0]);
-$datax2=explode(" ",$datax[3]);
-$datax3=explode(")",$datax2[3]);
-$dsize1=sizeof($datax);
-$dsize2=sizeof($datax2);
-$dsize3=sizeof($datax3);
-$recordidx1=$datax1[0];
-$recordidx2=$datax3[0];
-if($dsize1==4  && $dsize3==2)
-{
-print "\nINBOUND -->".$recordidx1."<--";
-print " POSTFIX DELIVERY -->".$recordidx2."<---";
-#print "\n --- DATAX";
-#print_r($datax);
-#print "\n --- DATAX1";
-#print_r($datax1);
-#print "\n --- DATAX3";
-#print_r($datax3);
-$sqlx="UPDATE `maillog_auth` SET `inbound_mailid` = '".$recordidx1."',`mail_id` = '".$recordidx2."' WHERE `mail_id` = '".$recordidx1."' and inbound_mailid='';";
-print "\n --> $sqlx \n";
-
-$upqueryresult = $dblink->query($sqlx);
-if (!$upqueryresult)
-{
-#print "\n Duplicate Error for $sqlx  \n ".mysqli_error($dblink)." \n";
-#exit;
-} 
-
-}
-
-//////
-}
-
-############################################
-############################################
-############################################
-$gotrecord=0;
 if($logx['logname']=='postfix/smtp' || $logx['logname']=='postfix/pipe')
 {
 #print_r($logx);
