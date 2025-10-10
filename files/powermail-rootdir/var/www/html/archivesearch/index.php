@@ -6,7 +6,7 @@
 ## should be without trailing /   (no slash)
 ##$vmainpath="/archive-mail-data";
 #$vmainpath="/mail-archive-compress";
-$vmainpath="/home/archivedata/mail-archive-compress";
+$vmainpath="/archivedata/mail-archive-compress";
 
 $smtphost="127.0.0.1";
 $smtpport="25";
@@ -316,10 +316,10 @@ if($searchmaintype == "to" and $searchcom==""){$qx1 = "rcpt:".$searchacc."   "; 
 $qx= $qx." AND date :".$searchdate." ";
 if($searchsub != ""){$qx3 = "AND subject:".$searchsub."  ";  $qx=$qx.$qx3;}
 
-$qx=$qx." AND mime:message/rfc822";
+#$qx=$qx." AND mime:message/rfc822";
 $cmdx="/usr/bin/recoll -t -m -n ".$noofrec."  -c  ".$vmainpath."/".$foldercheck."/indexdata/ -q \"(".$qx.")\" ";
 
-#print " --> $cmdx";
+print " --> $cmdx";
 
 $cmdoutx=`$cmdx`;
 $cmdout=explode("\n",$cmdoutx);
