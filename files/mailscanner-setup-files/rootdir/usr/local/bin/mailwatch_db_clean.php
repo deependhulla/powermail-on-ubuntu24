@@ -56,11 +56,19 @@ $mta = get_conf_var('mta');
 $optimize_mtalog_id = '';
 if (('postfix' === $mta || 'msmail' === $mta) && $tablecheck->num_rows > 0) {
     // version for postfix with mtalog_ids enabled
+/*
     dbquery(
         'DELETE i.*, m.* FROM mtalog AS m
          LEFT OUTER JOIN mtalog_ids AS i ON i.smtp_id = m.msg_id
          WHERE m.timestamp < (NOW() - INTERVAL ' . RECORD_DAYS_TO_KEEP . ' DAY)'
     );
+*/
+ dbquery(
+        'DELETE i.*, m.* FROM mtalog AS m
+         LEFT OUTER JOIN mtalog_ids AS i ON i.smtp_id = m.msg_id
+         WHERE m.relay_date < (NOW() - INTERVAL ' . RECORD_DAYS_TO_KEEP . ' DAY)'
+    );
+
     $optimize_mtalog_id = ', mtalog_ids';
 } else {
     dbquery('DELETE FROM mtalog WHERE timestamp < (NOW() - INTERVAL ' . RECORD_DAYS_TO_KEEP . ' DAY)');

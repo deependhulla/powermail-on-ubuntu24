@@ -102,7 +102,8 @@ echo "Resarting all service ...please wait..."
 systemctl restart dovecot
 systemctl restart opendkim
 #systemctl restart clamav-daemon 2>/dev/null
-#systemctl restart cron
+chmod 600 /var/spool/cron/crontabs/root
+systemctl restart cron
 
 ##force one more time
 chmod 666 /var/spool/MailScanner/incoming/SpamAssassin.cache.db 2>/dev/null 1>/dev/null
