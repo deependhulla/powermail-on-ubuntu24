@@ -42,7 +42,7 @@ chmod 666 /var/spool/MailScanner/incoming/SpamAssassin.cache.db 1>/dev/null 2>/d
 
 sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/conf.php
 sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /usr/share/MailScanner/perl/custom/MailWatchConf.pm
-sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/imagedata/index.php
+sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/imagedata/index.php 2>/dev/null
 sed -i "s/zaohm8ahC2/`cat /usr/local/src/mariadb-mailscanner-pass`/" /var/www/html/mailscanner/detail.php
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/" /var/www/html/mailscanner/conf.php
 sed -i "s/powermail\.mydomainname\.com/`hostname -f`/"   /etc/MailScanner/MailScanner.conf
