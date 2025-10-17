@@ -120,5 +120,6 @@ systemctl enable msmilter
 systemctl stop msmilter
 systemctl start msmilter
 systemctl enable postfwd
+systemctl start postfwd
 
 echo "Done."
